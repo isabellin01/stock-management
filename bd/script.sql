@@ -1,6 +1,5 @@
 CREATE DATABASE IF NOT EXISTS `stockclee`;
-USE `stockclee` ;
-
+USE `stockclee`;
 -- -----------------------------------------------------
 -- Table `stockclee`.`product`
 -- -----------------------------------------------------
@@ -97,3 +96,8 @@ CREATE TABLE IF NOT EXISTS `stockclee`.`product_ca` (
   CONSTRAINT `fk_product_ca_product1`
     FOREIGN KEY (`idproduct`)
     REFERENCES `stockclee`.`product` (`idproduct`));
+    
+-- TESTES
+select * from product;
+truncate table product;
+set FOREIGN_KEY_CHECKS = 0;
