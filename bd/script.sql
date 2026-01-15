@@ -5,8 +5,8 @@ USE `stockclee`;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `stockclee`.`product` (
   `idproduct` INT AUTO_INCREMENT,
-  `product_code` VARCHAR(20),
-  `description` VARCHAR(200),
+  `product_code` VARCHAR(5),
+  `description` VARCHAR(150),
   `category` VARCHAR(45),
   PRIMARY KEY (`idproduct`));
 
@@ -96,8 +96,24 @@ CREATE TABLE IF NOT EXISTS `stockclee`.`product_ca` (
   CONSTRAINT `fk_product_ca_product1`
     FOREIGN KEY (`idproduct`)
     REFERENCES `stockclee`.`product` (`idproduct`));
-    
--- TESTES
+
+-- INSERINDO DADOS NO PRODUTOS
+INSERT INTO product (`product_code`, `description`, `category`) VALUES
+('001', 'MÁSCARA', 'EPI'),('002', 'AVENTAL PLÁSTICO', 'EPI'),
+('003', 'BOTA COURO', 'EPI'),('004', 'BOTA PVC', 'EPI'),
+('005', 'CALÇA', 'EPI'),('006', 'CAMISA', 'EPI'),
+('007', 'CAPACETE', 'EPI'),('008', 'CAPA CHUVA', 'EPI'),
+('009', 'CATRACA CAPACETE', 'EPI'),('010', 'FILTRO QUÍMICO', 'EPI'),
+('011', 'LUVA DE RASPA', 'EPI'),('012', 'LUVA ALGODÃO', 'EPI'),
+('013', 'LUVA PVC', 'EPI'),('014', 'LUVA VAQUETA', 'EPI'),
+('015', 'LUVA VOLK AZUL/PRETO', 'EPI'),('016', 'MACACÃO BRANCO', 'EPI'),
+('017', 'MÁSCARA DE GÁS', 'EPI'),('018', 'ÓCULOS', 'EPI'),
+('019', 'PROT. AURICULAR', 'EPI'),('020', 'TOUCA TECIDO', 'EPI'),
+('021', 'VISEIRA', 'EPI');
+
+
+
+-- TEST
 select * from product;
 truncate table product;
-set FOREIGN_KEY_CHECKS = 0;
+set FOREIGN_KEY_CHECKS = 1;
