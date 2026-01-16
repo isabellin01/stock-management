@@ -7,7 +7,7 @@ import { pool } from "./db.js";
 import router from "./routes/estoqueRoute.js";
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());

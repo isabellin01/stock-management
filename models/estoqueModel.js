@@ -2,25 +2,60 @@ import { pool } from "../db.js";
 
 class estoqueModel {
     async listarEstoque() {
-        const sql = "SELECT * FROM product";
-        try {
-            const [resp] = await pool.query(sql);
-            return resp;
-        } catch (error) {
-            console.error("Erro para listar estoque", error);
-            throw error;
-        }
+        const [resp] = await pool.query("SELECT * FROM product");
+        return resp;
     }
 
     async cadastrarProduto({ product_code, description, category }) {
-        const sql = `INSERT INTO product (product_code, description, category) VALUES (?, ?, ?)`;
-        try {
-            const [resp] = await pool.query(sql, [product_code, description, category]);
-            return resp;
-        } catch (error) {
-            console.error("Erro para cadastrar produto", error);
-            throw error;
+        const sql = `
+            INSERT INTO product (product_code, description, category)
+            VALUES (?, ?, ?);
+        `;
+
+        const [resp] = await pool.query(sql, [
+            product_code,
+            description,
+            category
+        ]);
+
+        if (resp.affectedRows === 0) {
+            return { mensagem: "Produto não encontrado" };
         }
+
+        return {
+            mensagem: "Produto cadastrado com sucesso"
+        };
+    }
+
+    async listarProdCadastrado(idProduct) {
+        const sql = "SELECT * FROM product WHERE idproduct = ?";
+        const [resp] = await pool.query(sql, [idProduct]);
+        return resp;
+    }
+
+    async attProdCadastrado(idProduct, { product_code, description, category }) {
+        const sql = `
+            UPDATE product SET
+            product_code = ?,
+            description = ?,
+            category = ?
+            WHERE idproduct = ?;
+        `;
+
+        const [resp] = await pool.query(sql, [
+            product_code,
+            description,
+            category,
+            idProduct
+        ]);
+
+        if (resp.affectedRows === 0) {
+            return { mensagem: "Produto não encontrado" };
+        }
+
+        return {
+            mensagem: "Produto atualizado com sucesso"
+        };
     }
 }
 

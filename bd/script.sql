@@ -129,7 +129,12 @@ INSERT INTO product_stock (idproduct, current_quantity, date_stock) VALUES
 (16, 20,  '2026-01-10'),(17, 15,  '2026-01-10'),(18, 95,  '2026-01-10'),
 (19, 140, '2026-01-10'),(20, 200, '2026-01-10'),(21, 35,  '2026-01-10');
 
--- TEST
+delete from product where idproduct = 23;
+            UPDATE product SET
+            product_code = 'TESTE2',
+            description = 'TESTE3',
+            category = 'TESTE2'
+            WHERE idproduct = 26;
 select * from product;
 truncate table product;
 set FOREIGN_KEY_CHECKS = 1;

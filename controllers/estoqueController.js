@@ -6,8 +6,15 @@ class estoqueController {
     }
 
     async cadastrarProduto(dados) {
-        console.log(dados);
         return await estoqueModel.cadastrarProduto(dados);
+    }
+
+    async listarProdCadastrado(idProduct) {
+        return await estoqueModel.listarProdCadastrado(idProduct);
+    }
+
+    async attProdCadastrado(idProduct, dados) {
+        return await estoqueModel.attProdCadastrado(idProduct, dados);
     }
 }
 
