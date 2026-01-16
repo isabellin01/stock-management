@@ -3,7 +3,7 @@ dotenv.config();
 
 import express from "express";
 import cors from "cors";
-import { pool } from "./db.js";
+import { pool } from "./src/database/db.js";
 import router from "./routes/estoqueRoute.js";
 
 const app = express();

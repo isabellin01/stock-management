@@ -1,4 +1,4 @@
-import { pool } from "../db.js";
+import { pool } from "../src/database/db.js";
 
 class estoqueModel {
     async listarEstoque() {
@@ -17,10 +17,6 @@ class estoqueModel {
             description,
             category
         ]);
-
-        if (resp.affectedRows === 0) {
-            return { mensagem: "Produto não encontrado" };
-        }
 
         return {
             mensagem: "Produto cadastrado com sucesso"

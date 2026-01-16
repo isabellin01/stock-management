@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema</title>
+    <link rel="stylesheet" href="./src/styles/sidebar.css">
+    <link rel="stylesheet" href="./src/styles/main.css">
+</head>
+
+<body>
+
+    <aside class="sidebar">
+        <h2 class="logo">Stocklee</h2>
+
+        <nav>
+            <ul class="menu">
+                <li>
+                    <a href="estoque.html">Estoque</a>
+                </li>
+
+                <li class="has-submenu">
+                    <span>Produtos</span>
+                    <ul class="submenu">
+                        <li><a href="#">Adicionar</a></li>
+                        <li><a href="#">Modificar</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="movimentacoes.html">Movimentações</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+
+    <section class="maincontent">
+        <header class="header">
+            <h1>Estoque de EPI's</h1>
+        </header>
+
+        <div class="container">
+            <!-- Botão -->
+            <div class="month-dropdown">
+                <button class="month-btn" id="monthBtn">
+                    ☰ <span id="currentMonth"></span>
+                </button>
+                <ul class="month-list" id="monthList"></ul>
+            </div>
+
+            <!-- Tabela -->
+            <table class="stock-table">
+                <thead>
+                    <tr>
+                        <th>EPI's</th>
+                        <th>CA</th>
+                        <th>Estoque In.</th>
+                        <th>Estoque Fn.</th>
+                        <th>Estoque</th>
+                    </tr>
+                </thead>
+                <tbody id="stockBody">
+                    <!-- Dados -->
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+
+</body>
+<script>
+    const months = [
+        "JANEIRO", "FEVEREIRO", "MARÇO", "ABRIL", "MAIO", "JUNHO",
+        "JULHO", "AGOSTO", "SETEMBRO", "OUTUBRO", "NOVEMBRO", "DEZEMBRO"
+    ];
+</script>
+
+</html>

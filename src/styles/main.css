@@ -1,0 +1,82 @@
+.maincontent {
+    margin-left: 250px;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ebebeb;
+}
+
+.header {
+    background-color: #C36AB9;
+    color: #fff;
+    font-size: 12px;
+    padding: 20px 40px;
+}
+
+.container {
+    padding: 30px;
+}
+
+/* Botão mês */
+.month-dropdown {
+    position: relative;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.month-btn {
+    width: 100%;
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.month-btn:hover {
+    background-color: #ff4fa1;
+}
+
+.month-list {
+    display: none;
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    margin-top: 5px;
+    list-style: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.month-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.month-list li:hover {
+    background-color: #eee;
+}
+
+/* Tabela */
+.stock-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.stock-table th,
+.stock-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.stock-table th {
+    background-color: #ff69b4;
+    color: white;
+}
