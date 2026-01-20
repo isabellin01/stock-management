@@ -2,7 +2,7 @@ import { pool } from "../database/db.js";
 
 class estoqueModel {
     async listarEstoque() {
-        const [resp] = await pool.query("SELECT * FROM product");
+        const [resp] = await pool.query("SELECT * FROM estoque_view;");
         return resp;
     }
 

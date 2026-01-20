@@ -1,7 +1,7 @@
 .maincontent {
-    margin-left: 250px;
+    margin-left: 180px;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background-color: #ebebeb;
 }
 
@@ -16,6 +16,7 @@
     padding: 20px 40px;
     margin: 0px 50px 40px 50px;
     background-color: #fff;
+    overflow-y: auto;
 }
 
 /* Botão mês */

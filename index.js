@@ -5,12 +5,11 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
-import open from "open";
 
 import router from "./routes/estoqueRoute.js";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,6 +27,5 @@ app.use("/api", router);
 
 app.listen(PORT, () => {
     const url = `http://localhost:${PORT}`;
-    console.log(`Server is running on port ${PORT}`);
-    open(url);
+    console.log(`Server is running on port ${PORT}. Link: http://localhost:3000`);
 })
