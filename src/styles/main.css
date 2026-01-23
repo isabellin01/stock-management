@@ -5,18 +5,10 @@
     background-color: #ebebeb;
 }
 
-.header {
-    background-color: #C36AB9;
-    color: #fff;
-    font-size: 12px;
-    padding: 20px 40px;
-}
-
 .container {
     padding: 20px 40px;
     margin: 0px 50px 40px 50px;
     background-color: #fff;
-    overflow-y: auto;
 }
 
 /* Botão mês */
@@ -41,9 +33,9 @@
     transition: 0.1s ease-out;
 }
 
-.month-btn:hover {
+/* .month-btn:hover {
     background-color: #97348c;
-}
+} */
 
 .month-btn img {
     width: 30px;
@@ -83,11 +75,15 @@
 .stock-table td {
     padding: 12px;
     border: none;
-    border-bottom: 1px solid #989898;
     text-align: center;
 }
 
 .stock-table th {
     border: none;
     border-bottom: 3px solid #C36AB9;
+}
+
+.currentMonth{
+    font-size: 20px;
+    font-weight: 700;
 }

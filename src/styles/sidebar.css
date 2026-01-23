@@ -63,3 +63,10 @@ body {
 .submenu a {
     font-size: 14px;
 }
+
+.header {
+    background-color: #C36AB9;
+    color: #fff;
+    font-size: 12px;
+    padding: 20px 40px;
+}

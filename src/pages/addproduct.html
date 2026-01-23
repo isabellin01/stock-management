@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocklee - Cadastrar produto</title>
+    <link rel="stylesheet" href="../styles/sidebar.css">
+    <link rel="stylesheet" href="../styles/addproduct.css">
+</head>
+
+<body>
+    <aside class="sidebar">
+        <h2 class="logo">Stocklee</h2>
+        <nav>
+            <ul class="menu">
+                <li>
+                    <a href="../index.html">Estoque</a>
+                </li>
+
+                <li class="has-submenu">
+                    <span>Produtos</span>
+                    <ul class="submenu">
+                        <li><a href="./addproduct.html">Adicionar</a></li>
+                        <li><a href="#">Modificar</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="movimentacoes.html">Movimentações</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <section class="maincontent">
+        <header class="header">
+            <h1>Estoque de EPI's</h1>
+        </header>
+
+        <div class="container">
+            <h2>Cadastrar produto novo</h2>
+
+            <form id="productForm">
+                <div class="field" id="field">
+                    <label>Categoria</label>
+                    <select id="categoria" onchange="category(this.value)" required>
+                        <option value="">Selecione</option>
+                        <option value="EPI">EPI</option>
+                        <option value="EXPENSE">GASTO</option>
+                    </select>
+                </div>
+                <div id="dynamicFields">
+                </div>
+                <button type="submit">Cadastrar Produto</button>
+            </form>
+        </div>
+    </section>
+</body>
+<script src="../scripts/addproduct.js"></script>
+
+</html>

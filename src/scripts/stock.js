@@ -17,13 +17,18 @@ async function stockTable() {
         let color = i % 2 == 0 ? '#F9E8F7' : '';
         let line = `
         <tr id="tr_${i}" style="background-color: ${color};">
-            <td>${data[i].p_desc}</td>
-            <td>${data[i].c_curr}</td>
-            <td>${data[i].s_curr}</td>
+            <td>${data[i].stck_desc}</td>
+            <td>${data[i].stck_ca}</td>
+            <td>${data[i].stck_qtt}</td>
             <td> - </td>
-            <td>${data[i].s_curr}</td>
+            <td>${data[i].stck_qtt}</td>
         </tr>
         `
         stockBody.innerHTML += line;
     }
+
+    const currentDate = new Date();
+    const currentMonthIndex = currentDate.toLocaleString('pt-BR', { month: 'long' });
+
+    currentMonth.innerHTML = currentMonthIndex;
 }

@@ -3,26 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Sistema</title>
+    <title>Stocklee - Estoque</title>
     <link rel="stylesheet" href="./styles/sidebar.css">
     <link rel="stylesheet" href="./styles/main.css">
 </head>
 
 <body>
-
     <aside class="sidebar">
         <h2 class="logo">Stocklee</h2>
 
         <nav>
             <ul class="menu">
                 <li>
-                    <a href="estoque.html">Estoque</a>
+                    <a href="./index.html">Estoque</a>
                 </li>
 
                 <li class="has-submenu">
                     <span>Produtos</span>
                     <ul class="submenu">
-                        <li><a href="#">Adicionar</a></li>
+                        <li><a href="./pages/addproduct.html">Adicionar</a></li>
                         <li><a href="#">Modificar</a></li>
                     </ul>
                 </li>
@@ -34,7 +33,6 @@
         </nav>
     </aside>
 
-
     <section class="maincontent">
         <header class="header">
             <h1>Estoque de EPI's</h1>
@@ -42,7 +40,7 @@
 
         <div class="month-dropdown">
             <button class="month-btn" id="monthBtn">
-                <span id="currentMonth"></span><img src="./img/dropdown-arrow-svgrepo-com.svg">
+                <span id="currentMonth" class="currentMonth"></span>
             </button>
             <ul class="month-list" id="monthList"></ul>
         </div>
@@ -60,10 +58,9 @@
                 <tbody id="stockBody">
                 </tbody>
             </table>
-
         </div>
     </section>
 
 </body>
-<script src="./scripts/estoque.js"></script>
+<script src="./scripts/stock.js"></script>
 </html>
