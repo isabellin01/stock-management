@@ -6,20 +6,32 @@ class estoqueModel {
         return resp;
     }
 
-    async cadastrarProduto({ product_code, description, category }) {
+    async listCompanies(type) {
+        const [resp] = await pool.query(`SELECT name FROM partner WHERE partner_type = ? OR partner_type = 'BOTH';`,
+        [type]
+        );
+        return resp;
+    }
+
+    async registerExp({ partner, nf_number, icms_value, issue_date, due_date, order_number, dplbol, payment }) {
         const sql = `
-            INSERT INTO product (product_code, description, category)
-            VALUES (?, ?, ?);
+            INSERT INTO invoice (idpartner, nf_number, icms_value, issue_date, due_date, order_number, dplbol, payment)
+            VALUES ((SELECT idclient FROM partner WHERE name = ?), ?, ?, ?, ?, ?, ?, ?);
         `;
 
         const [resp] = await pool.query(sql, [
-            product_code,
-            description,
-            category
+            partner,
+            nf_number,
+            icms_value,
+            issue_date,
+            due_date,
+            order_number,
+            dplbol,
+            payment
         ]);
 
         return {
-            mensagem: "Produto cadastrado com sucesso"
+            mensagem: "Expenses registered successfully"
         };
     }
 

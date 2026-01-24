@@ -5,16 +5,20 @@ class estoqueController {
         return await estoqueModel.listarEstoque();
     }
 
-    async cadastrarProduto(dados) {
-        return await estoqueModel.cadastrarProduto(dados);
+    async listCompanies(type) {
+        return await estoqueModel.listCompanies(type);
+    }
+
+    async registerExp(data) {
+        return await estoqueModel.registerExp(data);
     }
 
     async listarProdCadastrado(idProduct) {
         return await estoqueModel.listarProdCadastrado(idProduct);
     }
 
-    async attProdCadastrado(idProduct, dados) {
-        return await estoqueModel.attProdCadastrado(idProduct, dados);
+    async attProdCadastrado(idProduct, data) {
+        return await estoqueModel.attProdCadastrado(idProduct, data);
     }
 }
 
