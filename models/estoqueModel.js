@@ -13,6 +13,13 @@ class estoqueModel {
         return resp;
     }
 
+    async listProducts(type) {
+        const [resp] = await pool.query(`SELECT prod_desc FROM product_view WHERE prod_ctg = ?;`,
+        [type]
+        );
+        return resp;
+    }
+
     async registerExp({ partner, nf_number, icms_value, issue_date, due_date, order_number, dplbol, payment }) {
         const sql = `
             INSERT INTO invoice (idpartner, nf_number, icms_value, issue_date, due_date, order_number, dplbol, payment)

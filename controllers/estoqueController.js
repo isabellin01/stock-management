@@ -9,6 +9,10 @@ class estoqueController {
         return await estoqueModel.listCompanies(type);
     }
 
+    async listProducts(type) {
+        return await estoqueModel.listProducts(type);
+    }
+
     async registerExp(data) {
         return await estoqueModel.registerExp(data);
     }

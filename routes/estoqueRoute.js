@@ -26,6 +26,21 @@ router.post(`/listCompanies`, async (req, res) => {
     }
 })
 
+router.post(`/listProducts`, async (req, res) => {
+    try {
+        const { type } = req.body;
+
+        if (!type) {
+            return res.status(400).json({ error: 'Product type is required' });
+        }
+
+        const resp = await estoqueController.listProducts(type);
+        res.status(200).json(resp);
+    } catch (error) {
+        res.status(500).json({ error: "Error listing products" });
+    }
+})
+
 router.post("/registerExp", async (req, res) => {
     try {
         const resp = await estoqueController.registerExp(req.body);

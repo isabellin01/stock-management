@@ -1,73 +1,63 @@
-async function registerExp(type) {
-    try {
-        const resp = await fetch(`http://localhost:3000/api/listCompanies`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ type })
-            }
-        );
-        return await resp.json();
-    } catch (error) {
-        console.error('Error registering expenses:', error);
-    }
-}
+const selectCategory = document.getElementById("categorySel");
+const button = document.getElementById("registerButton");
 
-async function listCompanies(type) {
-    try {
-        const resp = await fetch(`http://localhost:3000/api/listCompanies`,
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ type })
-            }
-        );
-        return await resp.json();
-    } catch (error) {
-        console.error('Error listing companies:', error);
-    }
-}
+selectCategory.addEventListener("change", (event) => {
+    renderCategory(event.target.value);
+});
 
-async function category(value) {
+async function renderCategory(value) {
     let companies = '';
+    let products = '';
 
     const field = document.getElementById('dynamicFields');
     if (value == "EPI") {
-        let data = await listCompanies("CLIENT");
-        for (let i = 0; i < data.length; i++) {
-            companies += `
-            <option value="${data[i].name}">${data[i].name}</option>
-        `
+        let dataCpn = await listCompanies("CLIENT");
+        let dataPrd = await listProducts("EPI");
+
+        for (let i = 0; i < dataCpn.length; i++) {
+            companies += `<option value="${dataCpn[i].name}">${dataCpn[i].name}</option>`
+        }
+
+        for (let i = 0; i < dataPrd.length; i++) {
+            products += `<option value="${dataPrd[i].prod_desc}">${dataPrd[i].prod_desc}</option>`
         }
 
         field.innerHTML = `
         <div id="fieldExpenses" class="fieldExpenses">
             <div class="field dynfield" id="dynfield">
                 <label>Produto</label>
-                <input type="text" id="nameExpense" required>
+                <select id="nameExpense" required>
+                    <option value="">Selecione</option>
+                    ${products}
+                </select>
                 <label>CA</label>
-                <input type="text" id="ca">
+                <input type="text" id="ca" required>
             </div>
         `;
     } else if (value == "EXPENSE") {
-        let data = await listCompanies("SUPPLIER");
-        for (let i = 0; i < data.length; i++) {
-            companies += `
-            <option value="${data[i].name}">${data[i].name}</option>
-        `
+        let dataCpn = await listCompanies("CLIENT");
+        let dataPrd = await listProducts("EXPENSES");
+
+        for (let i = 0; i < dataCpn.length; i++) {
+            companies += `<option value="${dataCpn[i].name}">${dataCpn[i].name}</option>`
+        }
+
+        for (let i = 0; i < dataPrd.length; i++) {
+            products += `<option value="${dataPrd[i].prod_desc}">${dataPrd[i].prod_desc}</option>`
         }
 
         field.innerHTML = `
         <div id="fieldExpenses" class="fieldExpenses">
             <div class="field" id="dynfield">
                 <label>Produto</label>
-                <input type="text" id="nameExpense" required>
+                <select id="nameExpense" required>
+                    <option value="">Selecione</option>
+                    ${products}
+                </select>
             </div>
         `;
+    } else {
+        return
     }
     field.innerHTML += `
         <div class="field dynfield" id="dynfield">
@@ -84,7 +74,7 @@ async function category(value) {
                 ${companies}
             </select>
             <label>Quantidade</label>
-            <input type="number" id="qttExpense">
+            <input type="number" id="qttExpense" required>
         </div>
 
         <div class="field dynfield" id="dynfield">
@@ -98,7 +88,7 @@ async function category(value) {
             <label>Vencimento</label>
             <input type="date" id="duedtExpense" required>
             <label>Dupl./Boleto</label>
-            <select id="duplbolExpense" required>
+            <select id="duplbolExpense">
                 <option value="">Selecione</option>
                 <option value="OK">OK</option>
             </select>
@@ -106,7 +96,7 @@ async function category(value) {
         
         <div class="field dynfield" id="dynfield">
             <label>Pagamento</label>
-            <select id="pagtoExpense" required>
+            <select id="pagtoExpense">
                 <option value="">Selecione</option>
                 <option value="OK">OK</option>
             </select>
@@ -117,4 +107,3 @@ async function category(value) {
     </div>
     `;
 }
-
