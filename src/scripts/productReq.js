@@ -1,17 +1,19 @@
-async function registerExp() {
+async function registerProd(formData) {
+    const data = Object.fromEntries(formData.entries());
+    console.log(data)
     try {
-        const resp = await fetch(`http://localhost:3000/api/registerExp`,
+        const resp = await fetch(`http://localhost:3000/api/registerProd`,
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ type })
+                body: JSON.stringify(data)
             }
         );
         return await resp.json();
     } catch (error) {
-        console.error('Error registering expenses:', error);
+        console.error('Error registering product:', error);
     }
 }
 

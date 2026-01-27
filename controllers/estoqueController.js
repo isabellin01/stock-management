@@ -13,17 +13,17 @@ class estoqueController {
         return await estoqueModel.listProducts(type);
     }
 
-    async registerExp(data) {
-        return await estoqueModel.registerExp(data);
+    async registerProd(data) {
+        return await estoqueModel.registerProd(data);
     }
 
-    async listarProdCadastrado(idProduct) {
-        return await estoqueModel.listarProdCadastrado(idProduct);
-    }
+    // async listarProdCadastrado(idProduct) {
+    //     return await estoqueModel.listarProdCadastrado(idProduct);
+    // }
 
-    async attProdCadastrado(idProduct, data) {
-        return await estoqueModel.attProdCadastrado(idProduct, data);
-    }
+    // async attProdCadastrado(idProduct, data) {
+    //     return await estoqueModel.attProdCadastrado(idProduct, data);
+    // }
 }
 
 export default new estoqueController();

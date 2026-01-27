@@ -41,13 +41,19 @@ router.post(`/listProducts`, async (req, res) => {
     }
 })
 
-router.post("/registerExp", async (req, res) => {
+router.post("/registerProd", async (req, res) => {
     try {
-        const resp = await estoqueController.registerExp(req.body);
-        res.status(201).json(resp);
+        const data = req.body;
+
+        if (!data) {
+            return res.status(400).json({ error: 'Products infos are required' });
+        }
+
+        const resp = await estoqueController.registerProd(data);
+        res.status(200).json(resp);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Error registering expenses" });
+        res.status(500).json({ error: "Error registering products" });
     }
 });
 
