@@ -1,8 +1,24 @@
-async function registerProd(formData) {
+async function registerNf(formData) {
     const data = Object.fromEntries(formData.entries());
-    console.log(data)
     try {
-        const resp = await fetch(`http://localhost:3000/api/registerProd`,
+        const resp = await fetch(`http://localhost:3000/api/registerNf`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }
+        );
+        return await resp.json();
+    } catch (error) {
+        console.error('Error registering product:', error);
+    }
+}
+
+async function registerNfitem(data) {
+    try {
+        const resp = await fetch(`http://localhost:3000/api/registerNfitem`,
             {
                 method: 'POST',
                 headers: {

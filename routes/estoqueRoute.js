@@ -41,7 +41,7 @@ router.post(`/listProducts`, async (req, res) => {
     }
 })
 
-router.post("/registerProd", async (req, res) => {
+router.post("/registerNf", async (req, res) => {
     try {
         const data = req.body;
 
@@ -49,11 +49,27 @@ router.post("/registerProd", async (req, res) => {
             return res.status(400).json({ error: 'Products infos are required' });
         }
 
-        const resp = await estoqueController.registerProd(data);
+        const resp = await estoqueController.registerNf(data);
         res.status(200).json(resp);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Error registering products" });
+    }
+});
+
+router.post("/registerNfitem", async (req, res) => {
+    try {
+        const data = req.body;
+
+        if (!data) {
+            return res.status(400).json({ error: 'Product item infos are required' });
+        }
+
+        const resp = await estoqueController.registerNfitem(data);
+        res.status(200).json(resp);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Error registering product item" });
     }
 });
 

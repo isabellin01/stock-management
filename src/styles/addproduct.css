@@ -78,20 +78,26 @@
 
 .product-item {
     display: flex;
+    font-size: 12px;
     align-items: center;
-    justify-content: center;
-    margin-left: 15px;
-    background-color: #8B2580;
-    padding-left: 5px;
-    color: #fff;
+    margin: 5px;
 }
 
-#productList {
-    display: flex;
+.product-item .qtt_ipt{
+    width: 110px;
+    margin-left: 5px;
 }
 
 .product-item .remove {
     font-size: 10px;
     width: 30px;
     margin-left: 5px;
+    background-color: #fff;
+    color: #8B2580;
+    transition: 0.1s ease-out;
+}
+
+.product-item .remove:hover{
+    background-color: #fff;
+    font-weight: 900;
 }

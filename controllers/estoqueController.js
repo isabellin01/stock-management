@@ -13,8 +13,12 @@ class estoqueController {
         return await estoqueModel.listProducts(type);
     }
 
-    async registerProd(data) {
-        return await estoqueModel.registerProd(data);
+    async registerNf(data) {
+        return await estoqueModel.registerNf(data);
+    }
+
+    async registerNfitem(data) {
+        return await estoqueModel.registerNfitem(data);
     }
 
     // async listarProdCadastrado(idProduct) {

@@ -8,28 +8,30 @@ class estoqueModel {
 
     async listCompanies(type) {
         const [resp] = await pool.query(`SELECT name FROM partner WHERE partner_type = ? OR partner_type = 'BOTH';`,
-        [type]
+            [type]
         );
         return resp;
     }
 
     async listProducts(type) {
         const [resp] = await pool.query(`SELECT prod_desc FROM product_view WHERE prod_ctg = ?;`,
-        [type]
+            [type]
         );
         return resp;
     }
 
-    async registerProd( data ) {
+    async registerNf(data) {
         const sql = `
-            INSERT INTO invoice (idpartner, nf_number, icms_price, issue_date, due_date, order_number, dplbol, payment)
-            VALUES ((SELECT idclient FROM partner WHERE name = ?), ?, ?, ?, ?, ?, ?, ?);
+            INSERT INTO invoice (idpartner, nf_number, quantity, icms_price, price, issue_date, due_date, order_number, dplbol, payment)
+            VALUES ((SELECT idclient FROM partner WHERE name = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?);
         `;
 
         const [resp] = await pool.query(sql, [
             data.partner,
             data.nf_number,
+            data.quantity,
             data.icms_price,
+            data.price,
             data.issue_date,
             data.due_date,
             data.order_number,
@@ -40,6 +42,28 @@ class estoqueModel {
         return {
             success: true,
             mensagem: "Product registered successfully"
+        };
+    }
+
+    async registerNfitem(data) {
+        const sql = `
+            INSERT INTO invoice_item (idproduct, idinvoice, quantity) VALUES
+            (
+            (SELECT idproduct FROM product WHERE description = ?),
+            (SELECT idinvoice FROM invoice WHERE nf_number = ?),
+            ?
+            );
+        `;
+
+        const [resp] = await pool.query(sql, [
+            data.productName,
+            data.nf,
+            data.productQtt
+        ]);
+
+        return {
+            success: true,
+            mensagem: "Product item registered successfully"
         };
     }
 

@@ -6,7 +6,7 @@ const productList = document.getElementById("productList");
 const button = document.getElementById("registerButton");
 const form = document.getElementById("productForm");
 
-const selectedProducts = new Set();
+const selectedProducts = new Map();
 
 selectCategory.addEventListener("change", (event) => {
     renderCategory(event.target.value);
@@ -21,7 +21,7 @@ productSelect.addEventListener("change", () => {
         return;
     }
 
-    selectedProducts.add(productId);
+    selectedProducts.set(productId, 1);
 
     const item = document.createElement("div");
     item.classList.add("product-item");
@@ -29,9 +29,23 @@ productSelect.addEventListener("change", () => {
 
     item.innerHTML = `
         <span>${productName}</span>
-        <input type="hidden" name="products[]" value="${productId}">
+        <input type="hidden" value="${productId}">
+        <input 
+            type="number" 
+            class="qtt_ipt" 
+            placeholder="Quantidade" 
+            min="1"
+            value="1"
+        >
         <button type="button" class="remove">✕</button>
     `;
+
+    const quantityInput = item.querySelector(".qtt_ipt");
+
+    quantityInput.addEventListener("input", () => {
+        const value = parseInt(quantityInput.value) || 1;
+        selectedProducts.set(productId, value);
+    });
 
     item.querySelector(".remove").addEventListener("click", () => {
         selectedProducts.delete(productId);
@@ -81,37 +95,70 @@ async function renderCategory(value) {
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const formList = ["product", "company", "nf", "icms", "date", "duedate", "order"]
-    const formAppend = ["product", "partner", "nf_number", "icms_price", "issue_date", "due_date", "order_number"]
+    const formList = ["company", "nf", "icms", "price", "date", "duedate", "order"]
+    const formAppend = ["partner", "nf_number", "icms_price", "price", "issue_date", "due_date", "order_number"]
 
     const formData = new FormData(form);
     const newFormData = new FormData();
 
-    const dplbolData = tinyint(formData.get("duplbol"))
-    const paymentData = tinyint(formData.get("payment"))
+    let apiCheck = true;
 
     for (let i = 0; i < formList.length; i++) {
-        newFormData.append(formAppend[i], formData.get(formList[i]));
+        const formValue = formData.get(formList[i]);
+        newFormData.append(formAppend[i],
+            formList[i] == "icms" || formList[i] == "price" ? Number(formValue) : formValue);
     }
 
-    newFormData.append("dplbol", dplbolData);
-    newFormData.append("payment", paymentData);
+    newFormData.append("dplbol", tinyintSql(formData.get("duplbol")));
+    newFormData.append("payment", tinyintSql(formData.get("payment")));
+    newFormData.append("quantity", nullSql(formData.get("quantity")));
+
+    console.log(newFormData)
 
     try {
-        const resp = await registerProd(newFormData);
-
-        if (resp.success) {
-            showNotification("Produto cadastrado com sucesso!", "success");
-            form.reset();
-        } else {
-            showNotification("Erro ao cadastrar o produto.", "error");
+        const resp = await registerNf(newFormData);
+        if (resp.error) {
+            showNotification("Erro ao cadastrar a nota fiscal.", "error");
+            apiCheck = false;
         }
     } catch (error) {
-        showNotification("Erro ao cadastrar o produto.", "error");
+        showNotification("Erro ao cadastrar a nota fiscal.", "error");
+        apiCheck = false;
         console.error(error);
+    }
+
+    for (const [key, qtt] of selectedProducts) {
+        let productData = {
+            nf: formData.get("nf"),
+            productName: key,
+            productQtt: qtt
+        }
+
+        try {
+            const resp = await registerNfitem(productData)
+            if (resp.error) {
+                showNotification("Erro ao cadastrar o produto.", "error");
+                apiCheck = false;
+            }
+        } catch (error) {
+            showNotification("Erro ao cadastrar o produto.", "error");
+            apiCheck = false;
+            console.error(error);
+        }
+    }
+
+    if (apiCheck == true) {
+        showNotification("Produto cadastrado com sucesso!", "success");
+        selectedProducts.clear();
+        form.reset();
+        productList.innerHTML = ``;
     }
 });
 
-function tinyint(data) {
+function tinyintSql(data) {
     return data == "OK" ? 1 : 0;
+}
+
+function nullSql(data) {
+    return data == "" ? Number(data) : data;
 }
