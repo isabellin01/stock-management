@@ -38,6 +38,7 @@ class estoqueModel {
         ]);
 
         return {
+            success: true,
             mensagem: "Product registered successfully"
         };
     }

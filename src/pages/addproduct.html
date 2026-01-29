@@ -7,9 +7,11 @@
     <title>Stocklee - Cadastrar produto</title>
     <link rel="stylesheet" href="../styles/sidebar.css">
     <link rel="stylesheet" href="../styles/addproduct.css">
+    <link rel="stylesheet" href="../styles/notification.css">
 </head>
 
 <body>
+    <div id="notification-container"></div>
     <aside class="sidebar">
         <h2 class="logo">Stocklee</h2>
         <nav>
@@ -19,7 +21,7 @@
                 </li>
 
                 <li class="has-submenu">
-                    <span>Produtos</span>
+                    <span>Nota fiscal</span>
                     <ul class="submenu">
                         <li><a href="./addproduct.html">Adicionar</a></li>
                         <li><a href="#">Modificar</a></li>
@@ -39,7 +41,7 @@
         </header>
 
         <div class="container">
-            <h2>Cadastrar produto novo</h2>
+            <h2>Cadastrar nova movimentação</h2>
 
             <form id="productForm">
                 <div class="field" id="field">
@@ -51,6 +53,62 @@
                     </select>
                 </div>
                 <div id="dynamicFields">
+                    <div class="fieldExpenses">
+                        <div class="field">
+                            <label>Produto</label>
+                            <select name="product" id="productSelect" required>
+                                <option value="">Selecione</option>
+                            </select>
+                        </div>
+
+                        <div class="field" id="productList">
+
+                        </div>
+
+                        <div class="field dynfield">
+                            <label>Emissão</label>
+                            <input type="date" name="date" required>
+                            <label>Nota Fiscal</label>
+                            <input type="text" name="nf" required>
+                        </div>
+
+                        <div class="field dynfield">
+                            <label>Empresa</label>
+                            <select name="company" id="company" required>
+                                <option value="">Selecione</option>
+                            </select>
+                            <label>Quantidade</label>
+                            <input type="number" name="quantity" required>
+                        </div>
+
+                        <div class="field dynfield">
+                            <label>ICMS</label>
+                            <input type="number" name="icms" required>
+                            <label>Valor</label>
+                            <input type="number" name="price" required>
+                        </div>
+
+                        <div class="field dynfield">
+                            <label>Vencimento</label>
+                            <input type="date" name="duedate" required>
+                            <label>Dupl./Boleto</label>
+                            <select name="duplbol">
+                                <option value="">Selecione</option>
+                                <option value="OK">OK</option>
+                            </select>
+                        </div>
+
+                        <div class="field dynfield">
+                            <label>Pagamento</label>
+                            <select name="payment">
+                                <option value="">Selecione</option>
+                                <option value="OK">OK</option>
+                            </select>
+                            <label>N. Pedido</label>
+                            <input type="text" name="order" required>
+                        </div>
+                        <button type="submit">Cadastrar Produto</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -58,4 +116,6 @@
 </body>
 <script src="../scripts/productReq.js"></script>
 <script src="../scripts/registerProduct.js"></script>
+<script src="../scripts/notification.js"></script>
+
 </html>

@@ -75,3 +75,23 @@
 .container button:hover {
     background: rgb(167, 70, 155);
 }
+
+.product-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    background-color: #8B2580;
+    padding-left: 5px;
+    color: #fff;
+}
+
+#productList {
+    display: flex;
+}
+
+.product-item .remove {
+    font-size: 10px;
+    width: 30px;
+    margin-left: 5px;
+}
